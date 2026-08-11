@@ -3,7 +3,7 @@
 <head>
     <title>My Comment Website</title>
 </head>
-
+<link rel="stylesheet" href="style.css">
 <body>
 
     <h1>Comment Window</h1>
