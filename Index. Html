@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comment Window</title>
+</head>
+<body>
+
+    <h2>Comment Window</h2>
+
+    <textarea id="comment" placeholder="Write your comment..."></textarea>
+    <br><br>
+
+    <button onclick="addComment()">Post Comment</button>
+
+    <h3>Comments</h3>
+    <div id="comments"></div>
+
+    <script>
+        function addComment() {
+            let text = document.getElementById("comment").value;
+
+            if (text.trim() !== "") {
+                let newComment = document.createElement("p");
+                newComment.innerText = text;
+
+                document.getElementById("comments").appendChild(newComment);
+                document.getElementById("comment").value = "";
+            }
+        }
+    </script>
+
+</body>
+</html>
