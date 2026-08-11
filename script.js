@@ -11,6 +11,12 @@ function addComment() {
 
     const comment = document.createElement("div");
     comment.className = "comment";
+    const deleteButton = document.createElement("button");
+deleteButton.textContent = "Delete";
+deleteButton.onclick = function() {
+    comment.remove();
+};
+comment.appendChild(deleteButton);
     comment.textContent = commentText;
 
     commentList.appendChild(comment);
