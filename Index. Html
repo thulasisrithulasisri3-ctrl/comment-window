@@ -1,31 +1,106 @@
-<!<head>
+<!DOCTYPE html>
+<html>
+<head>
     <title>Comment Window</title>
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 20px;
+        }
+
+        .comment-box {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input, textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .comment {
+            margin-top: 15px;
+            padding: 12px;
+            background: #f1f1f1;
+            border-radius: 8px;
+        }
+    </style>
 </head>
-    <h2>Comment Window</h2>
 
-    <textarea id="comment" placeholder="Write your comment..."></textarea>
-    <br><br>
+<body>
 
-    <button onclick="addComment()">Post Comment</button>
+<div class="comment-box">
+
+    <h2>💬 Comment Window</h2>
+
+    <input type="text" id="username"
+           placeholder="Enter your name">
+
+    <textarea id="comment"
+              placeholder="Write your comment..."></textarea>
+
+    <button onclick="addComment()">
+        Post Comment
+    </button>
 
     <h3>Comments</h3>
+
     <div id="comments"></div>
 
-    <script>
-        function addComment() {
-            let text = document.getElementById("comment").value;
+</div>
 
-            if (text.trim() !== "") {
-                let newComment = document.createElement("p");
-                newComment.innerText = text;
+<script>
+function addComment() {
 
-                document.getElementById("comments").appendChild(newComment);
-                document.getElementById("comment").value = "";
-            }
-        }
-    </script>
+    let name = document.getElementById("username").value;
+    let text = document.getElementById("comment").value;
+
+    if (name.trim() === "" || text.trim() === "") {
+        alert("Please enter your name and comment");
+        return;
+    }
+
+    let comment = document.createElement("div");
+
+    comment.className = "comment";
+
+    comment.innerHTML =
+        "<b>" + name + "</b><br>" + text;
+
+    document.getElementById("comments").appendChild(comment);
+
+    document.getElementById("username").value = "";
+    document.getElementById("comment").value = "";
+}
+</script>
 
 </body>
 </html>
-
