@@ -2,9 +2,10 @@
 <html>
 <head>
     <title>My Comment Website</title>
-</head><link rel="stylesheet" href="style.css">
-<body>
+<link rel="stylesheet" href="style.css">
+</head>
 
+<boby>
     <h1>Comment Window</h1>
 
     <input id="name" placeholder="Your name">
