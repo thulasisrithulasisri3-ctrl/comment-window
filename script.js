@@ -1,0 +1,25 @@
+```javascript
+function addComment() {
+
+    const input = document.getElementById("commentInput");
+    const commentList = document.getElementById("commentList");
+
+    const commentText = input.value.trim();
+
+    if (commentText === "") {
+        alert("Please enter a comment!");
+        return;
+    }
+
+    const comment = document.createElement("div");
+
+    comment.className = "comment";
+
+    comment.textContent = commentText;
+
+    commentList.appendChild(comment);
+
+    input.value = "";
+}
+```
+
