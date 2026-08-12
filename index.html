@@ -9,30 +9,29 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>💬 Comment Window</h1>
+    <h1>💬 Comment Window</h1>
 
-        <input
-            type="text"
-            id="userName"
-            placeholder="Your name"
-        >
+    <input
+        type="text"
+        id="userName"
+        placeholder="Your name"
+    >
 
-        <textarea
-            id="commentInput"
-            placeholder="Write your comment..."
-        ></textarea>
+    <textarea
+        id="commentInput"
+        placeholder="Write your comment..."
+    ></textarea>
 
-        <button onclick="addComment()">Post Comment</button>
+    <button onclick="addComment()">Post Comment</button>
+    <button onclick="clearComments()">Clear All Comments</button>
 
-        <button onclick="clearComments()">Clear All Comments</button>
+    <div id="commentList"></div>
 
-        <div id="commentList"></div>
+</div>
 
-    </div>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
