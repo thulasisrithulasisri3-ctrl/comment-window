@@ -56,7 +56,6 @@ function showComments() {
         div.appendChild(span);
         div.appendChild(editButton);
         div.appendChild(deleteButton);
-
         list.appendChild(div);
     });
 }
