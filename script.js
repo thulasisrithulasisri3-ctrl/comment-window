@@ -27,29 +27,34 @@ function showComments() {
         const span = document.createElement("span");
         span.textContent = text;
 
-        const button = document.createElement("button");
+        // Edit button
         const editButton = document.createElement("button");
-editButton.textContent = "Edit";
+        editButton.textContent = "Edit";
 
-editButton.onclick = function() {
-    const newText = prompt("Edit your comment:", text);
+        editButton.onclick = function() {
+            const newText = prompt("Edit your comment:", text);
 
-    if (newText !== null && newText.trim() !== "") {
-        comments[index] = newText.trim();
-        localStorage.setItem("comments", JSON.stringify(comments));
-        showComments();
-    }
-};
-        button.textContent = "Delete";
+            if (newText !== null && newText.trim() !== "") {
+                comments[index] = newText.trim();
+                localStorage.setItem("comments", JSON.stringify(comments));
+                showComments();
+            }
+        };
 
-        button.onclick = function() {
+        // Delete button
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+
+        deleteButton.onclick = function() {
             comments.splice(index, 1);
             localStorage.setItem("comments", JSON.stringify(comments));
             showComments();
         };
 
         div.appendChild(span);
-        div.appendChild(button);
+        div.appendChild(editButton);
+        div.appendChild(deleteButton);
+
         list.appendChild(div);
     });
 }
