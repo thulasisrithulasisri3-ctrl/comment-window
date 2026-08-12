@@ -20,10 +20,10 @@ function addComment() {
     comments.push({
         name: name,
         text: text,
-        time: new Date().toLocaleString()
+        likes: 0
     });
 
-    localStorage.setItem("comments", JSON.stringify(comments));
+    saveComments();
 
     nameInput.value = "";
     commentInput.value = "";
@@ -31,11 +31,20 @@ function addComment() {
     showComments();
 }
 
+function saveComments() {
+    localStorage.setItem("comments", JSON.stringify(comments));
+}
+
 function showComments() {
     const list = document.getElementById("commentList");
     list.innerHTML = "";
 
     comments.forEach(function(comment, index) {
+
+        if (typeof comment.likes !== "number") {
+            comment.likes = 0;
+        }
+
         const div = document.createElement("div");
         div.className = "comment";
 
@@ -49,8 +58,14 @@ function showComments() {
         const text = document.createElement("p");
         text.textContent = comment.text;
 
-        const time = document.createElement("small");
-        time.textContent = comment.time || "";
+        const likeButton = document.createElement("button");
+        likeButton.textContent = "❤️ " + comment.likes;
+
+        likeButton.onclick = function() {
+            comment.likes++;
+            saveComments();
+            showComments();
+        };
 
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
@@ -62,13 +77,8 @@ function showComments() {
             );
 
             if (newText !== null && newText.trim() !== "") {
-                comments[index].text = newText.trim();
-
-                localStorage.setItem(
-                    "comments",
-                    JSON.stringify(comments)
-                );
-
+                comment.text = newText.trim();
+                saveComments();
                 showComments();
             }
         };
@@ -78,19 +88,14 @@ function showComments() {
 
         deleteButton.onclick = function() {
             comments.splice(index, 1);
-
-            localStorage.setItem(
-                "comments",
-                JSON.stringify(comments)
-            );
-
+            saveComments();
             showComments();
         };
 
         div.appendChild(avatar);
         div.appendChild(name);
         div.appendChild(text);
-        div.appendChild(time);
+        div.appendChild(likeButton);
         div.appendChild(editButton);
         div.appendChild(deleteButton);
 
@@ -104,4 +109,4 @@ function clearComments() {
     showComments();
 }
 
-window.addEventListener("load", showComments);
+window.addEventListener("load", showComments);   
