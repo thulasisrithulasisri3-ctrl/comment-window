@@ -1,13 +1,13 @@
 let comments = JSON.parse(localStorage.getItem("comments") || "[]");
 
 function addComment() {
-    const input = document.getElementById("commentInput");
-    const userNameInput = document.getElementById("userName");
+    const nameInput = document.getElementById("userName");
+    const commentInput = document.getElementById("commentInput");
 
-    const text = input.value.trim();
-    const userName = userNameInput.value.trim();
+    const name = nameInput.value.trim();
+    const text = commentInput.value.trim();
 
-    if (userName === "") {
+    if (name === "") {
         alert("Please enter your name!");
         return;
     }
@@ -18,23 +18,25 @@ function addComment() {
     }
 
     comments.push({
-        name: userName,
+        name: name,
         text: text
     });
 
     localStorage.setItem("comments", JSON.stringify(comments));
 
-    input.value = "";
-    userNameInput.value = "";
+    nameInput.value = "";
+    commentInput.value = "";
 
     showComments();
 }
 
 function showComments() {
     const list = document.getElementById("commentList");
+
     list.innerHTML = "";
 
     comments.forEach(function(comment, index) {
+
         const div = document.createElement("div");
         div.className = "comment";
 
@@ -48,11 +50,21 @@ function showComments() {
         editButton.textContent = "Edit";
 
         editButton.onclick = function() {
-            const newText = prompt("Edit your comment:", comment.text);
+
+            const newText = prompt(
+                "Edit your comment:",
+                comment.text
+            );
 
             if (newText !== null && newText.trim() !== "") {
+
                 comments[index].text = newText.trim();
-                localStorage.setItem("comments", JSON.stringify(comments));
+
+                localStorage.setItem(
+                    "comments",
+                    JSON.stringify(comments)
+                );
+
                 showComments();
             }
         };
@@ -61,8 +73,14 @@ function showComments() {
         deleteButton.textContent = "Delete";
 
         deleteButton.onclick = function() {
+
             comments.splice(index, 1);
-            localStorage.setItem("comments", JSON.stringify(comments));
+
+            localStorage.setItem(
+                "comments",
+                JSON.stringify(comments)
+            );
+
             showComments();
         };
 
@@ -76,8 +94,11 @@ function showComments() {
 }
 
 function clearComments() {
+
     comments = [];
+
     localStorage.removeItem("comments");
+
     showComments();
 }
 
