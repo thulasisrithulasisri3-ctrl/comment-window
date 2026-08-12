@@ -1,60 +1,45 @@
+let comments = JSON.parse(localStorage.getItem("comments")) || [];
+
 function addComment() {
     const input = document.getElementById("commentInput");
-    const commentList = document.getElementById("commentList");
+    const text = input.value.trim();
 
-    const commentText = input.value.trim();
-
-    if (commentText === "") {
+    if (text === "") {
         alert("Please enter a comment!");
         return;
     }
 
-    const comment = document.createElement("div");
-    comment.className = "comment";
-
-    const text = document.createElement("span");
-    text.textContent = commentText;
-
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
-
-    deleteButton.onclick = function () {
-        comment.remove();
-    };
-
-    comment.appendChild(text);
-    comment.appendChild(deleteButton);
-    commentList.appendChild(comment);
-
-    let comments = JSON.parse(localStorage.getItem("comments")) || [];
-    comments.push(commentText);
+    comments.push(text);
     localStorage.setItem("comments", JSON.stringify(comments));
 
     input.value = "";
+    showComments();
 }
 
-function loadComments() {
-    const commentList = document.getElementById("commentList");
-    const comments = JSON.parse(localStorage.getItem("comments")) || [];
+function showComments() {
+    const list = document.getElementById("commentList");
+    list.innerHTML = "";
 
-    comments.forEach(function (text) {
-        const comment = document.createElement("div");
-        comment.className = "comment";
+    comments.forEach(function(text, index) {
+        const div = document.createElement("div");
+        div.className = "comment";
 
-        const commentText = document.createElement("span");
-        commentText.textContent = text;
+        const span = document.createElement("span");
+        span.textContent = text;
 
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
+        const button = document.createElement("button");
+        button.textContent = "Delete";
 
-        deleteButton.onclick = function () {
-            comment.remove();
+        button.onclick = function() {
+            comments.splice(index, 1);
+            localStorage.setItem("comments", JSON.stringify(comments));
+            showComments();
         };
 
-        comment.appendChild(commentText);
-        comment.appendChild(deleteButton);
-        commentList.appendChild(comment);
+        div.appendChild(span);
+        div.appendChild(button);
+        list.appendChild(div);
     });
 }
 
-window.onload = loadComments;
+window.onload = showComments;
