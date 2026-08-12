@@ -2,14 +2,26 @@ let comments = JSON.parse(localStorage.getItem("comments") || "[]");
 
 function addComment() {
     const input = document.getElementById("commentInput");
+    const userNameInput = document.getElementById("userName");
+
     const text = input.value.trim();
+    const userName = userNameInput.value.trim();
+
+    if (userName === "") {
+        alert("Please enter your name!");
+        return;
+    }
 
     if (text === "") {
         alert("Please enter a comment!");
         return;
     }
 
-    comments.push(text);
+    comments.push({
+        name: userName,
+        text: text
+    });
+
     saveComments();
 
     input.value = "";
@@ -24,21 +36,24 @@ function showComments() {
     const list = document.getElementById("commentList");
     list.innerHTML = "";
 
-    comments.forEach(function(text, index) {
+    comments.forEach(function(comment, index) {
         const div = document.createElement("div");
         div.className = "comment";
 
-        const span = document.createElement("span");
-        span.textContent = text;
+        const name = document.createElement("strong");
+        name.textContent = comment.name;
+
+        const text = document.createElement("span");
+        text.textContent = comment.text;
 
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
 
         editButton.onclick = function() {
-            const newText = prompt("Edit your comment:", comments[index]);
+            const newText = prompt("Edit your comment:", comment.text);
 
             if (newText !== null && newText.trim() !== "") {
-                comments[index] = newText.trim();
+                comments[index].text = newText.trim();
                 saveComments();
                 showComments();
             }
@@ -53,18 +68,16 @@ function showComments() {
             showComments();
         };
 
-        div.appendChild(span);
+        div.appendChild(name);
+        div.appendChild(document.createElement("br"));
+        div.appendChild(text);
         div.appendChild(editButton);
         div.appendChild(deleteButton);
+
         list.appendChild(div);
     });
 }
 
-function clearComments() {
-    comments = [];
-    localStorage.removeItem("comments");
-    showComments();
-}
 function clearComments() {
     comments = [];
     localStorage.removeItem("comments");
