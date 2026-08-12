@@ -23,7 +23,8 @@ function addComment() {
     comments.push({
         name: name,
         text: text,
-        likes: 0
+        likes: 0,
+        time: new Date().toLocaleString()
     });
 
     saveComments();
@@ -73,6 +74,10 @@ function showComments() {
         const text = document.createElement("p");
 
         text.textContent = comment.text;
+
+        const time = document.createElement("small");
+
+        time.textContent = comment.time || "";
 
         const likeButton =
             document.createElement("button");
@@ -134,15 +139,11 @@ function showComments() {
         };
 
         div.appendChild(avatar);
-
         div.appendChild(name);
-
         div.appendChild(text);
-
+        div.appendChild(time);
         div.appendChild(likeButton);
-
         div.appendChild(editButton);
-
         div.appendChild(deleteButton);
 
         list.appendChild(div);
