@@ -68,6 +68,10 @@ button:hover {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
+button:active {
+    transform: scale(0.96);
+}
+
 #commentList {
     margin-top: 25px;
 }
@@ -103,4 +107,13 @@ button:hover {
 .comment p {
     margin: 12px 0;
     color: #555;
+    line-height: 1.5;
+}
+
+.comment small {
+    display: block;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    color: #777;
+    font-size: 13px;
 }
