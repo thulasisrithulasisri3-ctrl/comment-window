@@ -71,10 +71,7 @@ function showComments() {
         editButton.textContent = "Edit";
 
         editButton.onclick = function() {
-            const newText = prompt(
-                "Edit your comment:",
-                comment.text
-            );
+            const newText = prompt("Edit your comment:", comment.text);
 
             if (newText !== null && newText.trim() !== "") {
                 comment.text = newText.trim();
@@ -109,4 +106,6 @@ function clearComments() {
     showComments();
 }
 
-window.addEventListener("load", showComments);   
+window.addEventListener("load", showComments);
+
+            
