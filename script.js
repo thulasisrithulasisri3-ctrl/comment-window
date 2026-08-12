@@ -1,4 +1,4 @@
-let comments = JSON.parse(localStorage.getItem("comments")) || [];
+let comments = JSON.parse(localStorage.getItem("comments") || "[]");
 
 function addComment() {
     const input = document.getElementById("commentInput");
@@ -10,10 +10,14 @@ function addComment() {
     }
 
     comments.push(text);
-    localStorage.setItem("comments", JSON.stringify(comments));
+    saveComments();
 
     input.value = "";
     showComments();
+}
+
+function saveComments() {
+    localStorage.setItem("comments", JSON.stringify(comments));
 }
 
 function showComments() {
@@ -27,27 +31,25 @@ function showComments() {
         const span = document.createElement("span");
         span.textContent = text;
 
-        // Edit button
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
 
         editButton.onclick = function() {
-            const newText = prompt("Edit your comment:", text);
+            const newText = prompt("Edit your comment:", comments[index]);
 
             if (newText !== null && newText.trim() !== "") {
                 comments[index] = newText.trim();
-                localStorage.setItem("comments", JSON.stringify(comments));
+                saveComments();
                 showComments();
             }
         };
 
-        // Delete button
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
 
         deleteButton.onclick = function() {
             comments.splice(index, 1);
-            localStorage.setItem("comments", JSON.stringify(comments));
+            saveComments();
             showComments();
         };
 
@@ -59,4 +61,4 @@ function showComments() {
     });
 }
 
-window.onload = showComments;
+window.addEventListener("load", showComments);
