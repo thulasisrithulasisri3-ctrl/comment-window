@@ -18,7 +18,7 @@ function addComment() {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
 
-    deleteButton.onclick = function() {
+    deleteButton.onclick = function () {
         comment.remove();
     };
 
@@ -37,7 +37,7 @@ function loadComments() {
     const commentList = document.getElementById("commentList");
     const comments = JSON.parse(localStorage.getItem("comments")) || [];
 
-    comments.forEach(function(text) {
+    comments.forEach(function (text) {
         const comment = document.createElement("div");
         comment.className = "comment";
 
@@ -47,7 +47,7 @@ function loadComments() {
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
 
-        deleteButton.onclick = function() {
+        deleteButton.onclick = function () {
             comment.remove();
         };
 
