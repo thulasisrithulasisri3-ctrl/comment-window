@@ -19,7 +19,8 @@ function addComment() {
 
     comments.push({
         name: name,
-        text: text
+        text: text,
+        time: new Date().toLocaleString()
     });
 
     localStorage.setItem("comments", JSON.stringify(comments));
@@ -48,15 +49,26 @@ function showComments() {
         const text = document.createElement("p");
         text.textContent = comment.text;
 
+        const time = document.createElement("small");
+        time.textContent = comment.time || "";
+
         const editButton = document.createElement("button");
         editButton.textContent = "Edit";
 
         editButton.onclick = function() {
-            const newText = prompt("Edit your comment:", comment.text);
+            const newText = prompt(
+                "Edit your comment:",
+                comment.text
+            );
 
             if (newText !== null && newText.trim() !== "") {
                 comments[index].text = newText.trim();
-                localStorage.setItem("comments", JSON.stringify(comments));
+
+                localStorage.setItem(
+                    "comments",
+                    JSON.stringify(comments)
+                );
+
                 showComments();
             }
         };
@@ -66,13 +78,19 @@ function showComments() {
 
         deleteButton.onclick = function() {
             comments.splice(index, 1);
-            localStorage.setItem("comments", JSON.stringify(comments));
+
+            localStorage.setItem(
+                "comments",
+                JSON.stringify(comments)
+            );
+
             showComments();
         };
 
         div.appendChild(avatar);
         div.appendChild(name);
         div.appendChild(text);
+        div.appendChild(time);
         div.appendChild(editButton);
         div.appendChild(deleteButton);
 
