@@ -11,14 +11,19 @@ function addComment() {
 
     const comment = document.createElement("div");
     comment.className = "comment";
-    const deleteButton = document.createElement("button");
-deleteButton.textContent = "Delete";
-deleteButton.onclick = function() {
-    comment.remove();
-};
-comment.appendChild(deleteButton);
-    comment.textContent = commentText;
 
+    const text = document.createElement("span");
+    text.textContent = commentText;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+
+    deleteButton.onclick = function() {
+        comment.remove();
+    };
+
+    comment.appendChild(text);
+    comment.appendChild(deleteButton);
     commentList.appendChild(comment);
 
     let comments = JSON.parse(localStorage.getItem("comments")) || [];
@@ -35,7 +40,19 @@ function loadComments() {
     comments.forEach(function(text) {
         const comment = document.createElement("div");
         comment.className = "comment";
-        comment.textContent = text;
+
+        const commentText = document.createElement("span");
+        commentText.textContent = text;
+
+        const deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+
+        deleteButton.onclick = function() {
+            comment.remove();
+        };
+
+        comment.appendChild(commentText);
+        comment.appendChild(deleteButton);
         commentList.appendChild(comment);
     });
 }
