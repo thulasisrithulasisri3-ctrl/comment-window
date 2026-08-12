@@ -7,11 +7,11 @@
 
 body {
     min-height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
 .container {
@@ -25,8 +25,8 @@ body {
 
 h1 {
     text-align: center;
-    margin-bottom: 25px;
     color: #333;
+    margin-bottom: 25px;
 }
 
 input,
@@ -66,10 +66,6 @@ button {
 button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-}
-
-button:active {
-    transform: scale(0.96);
 }
 
 #commentList {
