@@ -65,5 +65,10 @@ function clearComments() {
     localStorage.removeItem("comments");
     showComments();
 }
+function clearComments() {
+    comments = [];
+    localStorage.removeItem("comments");
+    showComments();
+}
 
 window.addEventListener("load", showComments);
