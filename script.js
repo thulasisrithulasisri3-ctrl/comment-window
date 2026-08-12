@@ -22,14 +22,12 @@ function addComment() {
         text: text
     });
 
-    saveComments();
+    localStorage.setItem("comments", JSON.stringify(comments));
 
     input.value = "";
-    showComments();
-}
+    userNameInput.value = "";
 
-function saveComments() {
-    localStorage.setItem("comments", JSON.stringify(comments));
+    showComments();
 }
 
 function showComments() {
@@ -43,7 +41,7 @@ function showComments() {
         const name = document.createElement("strong");
         name.textContent = comment.name;
 
-        const text = document.createElement("span");
+        const text = document.createElement("p");
         text.textContent = comment.text;
 
         const editButton = document.createElement("button");
@@ -54,7 +52,7 @@ function showComments() {
 
             if (newText !== null && newText.trim() !== "") {
                 comments[index].text = newText.trim();
-                saveComments();
+                localStorage.setItem("comments", JSON.stringify(comments));
                 showComments();
             }
         };
@@ -64,12 +62,11 @@ function showComments() {
 
         deleteButton.onclick = function() {
             comments.splice(index, 1);
-            saveComments();
+            localStorage.setItem("comments", JSON.stringify(comments));
             showComments();
         };
 
         div.appendChild(name);
-        div.appendChild(document.createElement("br"));
         div.appendChild(text);
         div.appendChild(editButton);
         div.appendChild(deleteButton);
